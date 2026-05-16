@@ -1,23 +1,20 @@
 package com.artillexstudios.axsellwands.hooks.shop;
 
-import me.sat7.dynamicshop.DynaShopAPI;
+import com.epixdevelopment.sellworth.Sell;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 
-public class DynamicShop3Hook implements PricesHook {
+public class SellWorthPricesHook implements PricesHook {
 
     @Override
     public void setup() {
+        // Nothing to setup
     }
 
     @Override
     public double getPrice(ItemStack it) {
-        double most = -1.0D;
-        for (String str : DynaShopAPI.getShops()) {
-            most = Math.max(DynaShopAPI.getSellPrice(str, it), most);
-        }
-        if (most == -1.0D) return most;
-        return most * it.getAmount();
+        if (it == null || it.getAmount() == 0) return 0;
+        return Sell.getInstance().calculateItemWorth(it);
     }
 
     @Override

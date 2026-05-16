@@ -14,9 +14,10 @@ hooks:
   # - EconomyShopGUI
   # - DynamicShop
   # - ExcellentShop
+  # - SellWorth
   # - CMI
   # - custom
-  price-plugin: "builtin"
+  price-plugin: "SellWorth"
 
 hook-settings:
   # economy

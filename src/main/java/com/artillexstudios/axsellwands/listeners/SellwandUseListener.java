@@ -8,6 +8,7 @@ import com.artillexstudios.axapi.utils.Title;
 import com.artillexstudios.axsellwands.api.events.AxSellwandsSellEvent;
 import com.artillexstudios.axsellwands.hooks.HookManager;
 import com.artillexstudios.axsellwands.hooks.container.ContainerHook;
+import com.artillexstudios.axsellwands.hooks.shop.SellWorthHook;
 import com.artillexstudios.axsellwands.sellwands.Sellwand;
 import com.artillexstudios.axsellwands.sellwands.Sellwands;
 import com.artillexstudios.axsellwands.utils.HistoryUtils;
@@ -97,7 +98,7 @@ public class SellwandUseListener implements Listener {
                 if (it == null) continue;
                 double price = HookManager.getShopPrices().getPrice(player, it);
                 if (price <= 0) continue;
-                price *= multiplier;
+                price *= (multiplier + (SellWorthHook.getMultiplier(player, it) - 1.0));
 
                 newSoldPrice += price;
                 newSoldAmount += it.getAmount();
@@ -200,7 +201,7 @@ public class SellwandUseListener implements Listener {
                 if (it == null) continue;
                 double price = HookManager.getShopPrices().getPrice(player, it);
                 if (price == -1.0D) continue;
-                price *= multiplier;
+                price *= (multiplier + (SellWorthHook.getMultiplier(player, it) - 1.0));
 
                 newSoldPrice += price;
                 newSoldAmount += it.getAmount();
